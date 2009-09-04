@@ -1,0 +1,44 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:five="http://namespaces.zope.org/five"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    xmlns:cmf="http://namespaces.zope.org/cmf"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    i18n_domain="atreal.richfile.metadata">
+
+    <five:registerPackage package="." initialize=".initialize" />
+
+    <include package="atreal.filestorage.common" />
+    <include package="atreal.richfile.qualifier" />
+
+    <i18n:registerTranslations directory="locales"/>
+
+    <adapter
+        for="atreal.richfile.metadata.interfaces.IMetadata"
+        factory="atreal.richfile.metadata.adapters.MetadataExtractor"
+        provides="atreal.richfile.metadata.interfaces.IMetadataExtractor"
+        />
+
+    <subscriber
+        for="atreal.richfile.metadata.interfaces.IMetadata
+             atreal.richfile.qualifier.interfaces.IFileQualifiedEvent"
+        handler="atreal.richfile.metadata.events.extractMetadata"
+        />
+
+    <subscriber
+        for="atreal.richfile.metadata.interfaces.IMetadata
+             atreal.richfile.qualifier.interfaces.IMimetypeChangedEvent"
+        handler="atreal.richfile.metadata.events.cleanMetadata"
+        />
+
+    <include package=".browser" />
+
+    <genericsetup:registerProfile
+        name="default"
+        title="RichFileMetadata"
+        directory="profiles/default"
+        description="Plugin for RichFileQualifier that extracts metadata from files."
+        provides="Products.GenericSetup.interfaces.EXTENSION"
+        />
+
+</configure>

@@ -1,0 +1,84 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:five="http://namespaces.zope.org/five"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="atreal.richfile.metadata">
+
+    <browser:resource
+        name="richfilemetadata_icon.png"
+        image="richfilemetadata_icon.png"
+        layer="atreal.richfile.metadata.interfaces.IRichFileMetadataLayer"
+        />
+
+    <adapter factory=".controlpanel.RichFileMetadataControlPanelAdapter" />
+
+
+    <browser:page
+        name="richfilemetadata-controlpanel"
+        for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+        class=".controlpanel.RichFileMetadataControlPanel"
+        permission="cmf.ManagePortal"
+        layer="atreal.richfile.metadata.interfaces.IRichFileMetadataLayer"
+        />
+
+    <browser:viewlet
+        for="atreal.richfile.metadata.interfaces.IMetadata"
+        name="atreal.richfile.metadata.viewlet"
+        manager="atreal.richfile.qualifier.interfaces.IRFViewletManager"
+        class=".viewlets.MetadataViewlet"
+        permission="zope2.View"
+        layer="atreal.richfile.metadata.interfaces.IRichFileMetadataLayer"
+        />
+
+    <browser:page
+        for="atreal.richfile.metadata.interfaces.IMetadata"
+        name="rfmetadata"
+        class=".views.RFMetadataView"
+        permission="zope2.View"
+        layer="atreal.richfile.metadata.interfaces.IRichFileMetadataLayer"
+        allowed_interface="atreal.richfile.qualifier.interfaces.IRFView"
+        />
+
+
+    <!--KSS entry-->
+
+    <browser:resource
+      name="metadata.kss"
+      file="metadata.kss"
+      layer="atreal.richfile.metadata.interfaces.IRichFileMetadataLayer"
+      />
+
+    <browser:page
+        for="atreal.richfile.metadata.interfaces.IMetadata"
+        name="updateViewletMetadata"
+        attribute="update"
+        class=".views.RFMetadataView"
+        permission="cmf.ModifyPortalContent"
+        />
+
+    <browser:page
+        for="atreal.richfile.metadata.interfaces.IMetadata"
+        name="activateViewletMetadata"
+        attribute="active"
+        class=".views.RFMetadataView"
+        permission="cmf.ModifyPortalContent"
+        />
+
+    <browser:page
+        for="atreal.richfile.metadata.interfaces.IMetadata"
+        name="unactivateViewletMetadata"
+        attribute="unactive"
+        class=".views.RFMetadataView"
+        permission="cmf.ModifyPortalContent"
+        />
+    
+    <browser:page
+        for="atreal.richfile.metadata.interfaces.IMetadata"
+        name="refreshViewletMetadata"
+        attribute="refresh"
+        class=".views.RFMetadataView"
+        permission="zope2.View"
+        />
+
+
+</configure>

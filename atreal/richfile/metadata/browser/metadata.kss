@@ -1,0 +1,23 @@
+#metadata a.viewlet-update:click {
+    evt-click-preventdefault:               true;
+    action-server:                          updateViewletMetadata;
+    updateViewletMetadata-viewlet:          kssAttr(viewlet, True);
+}
+
+#metadata a.viewlet-activate:click {
+    evt-click-preventdefault:               true;
+    action-server:                          activateViewletMetadata;
+    activateViewletMetadata-viewlet:        kssAttr(viewlet, True);
+}
+
+#metadata a.viewlet-unactivate:click {
+    evt-click-preventdefault:               true;
+    action-server:                          unactivateViewletMetadata;
+    unactivateViewletMetadata-viewlet:      kssAttr(viewlet, True);
+}
+
+#metadata a.viewlet-refresh:click {
+    evt-click-preventdefault:               true;
+    action-server:                          refreshViewletMetadata;
+    refreshViewletMetadata-viewlet:         kssAttr(viewlet, True);
+}

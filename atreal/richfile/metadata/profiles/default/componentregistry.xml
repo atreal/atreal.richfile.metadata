@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<componentregistry>
+ <adapters/>
+ <utilities>
+  <utility
+     name="atreal.richfile.metadata.IRichFileMetadataSite"
+     component="atreal.richfile.metadata.interfaces.IRichFileMetadataSite"
+     interface="zope.interface.interfaces.IInterface" />
+ </utilities>
+</componentregistry>

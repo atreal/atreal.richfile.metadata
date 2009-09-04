@@ -1,0 +1,49 @@
+<dl class="richfile portlet"
+    tal:condition="view/available"
+    tal:attributes="id view/plugin_id"
+    i18n:domain="atreal.richfile.metadata">
+
+    <dt tal:attributes="id string:${view/plugin_id}Header" class="rfheader portletHeader">
+        <span class="portletTopLeft"></span>
+        <tal:block tal:replace="structure view/controls"/>
+        <span class="title" style="font-weight:bold"
+            i18n:translate="">
+            Metadata
+        </span>
+
+        <span class="portletTopRight"></span>
+    </dt>
+    
+    <dd tal:condition="view/active"
+        class="rfbody portletItem odd"
+        tal:attributes="id string:${view/plugin_id}Body;
+                        class string:rfbody portletItem odd ${view/collapsed}">
+        
+        <!--Your specific code here-->
+        
+        <table class="listing" summary="Metadatas">
+            <thead>
+                <tr>
+                    <th i18n:translate="" class="nosort">Label</th>
+                    <th i18n:translate="" class="nosort">Value</th>
+                </tr>
+            </thead>
+            <tbody tal:define="metadata view/metadata">
+                <tr tal:condition="metadata"
+                    tal:repeat="item python:metadata.items()">
+                    <td tal:content="python:item[0]"/>
+                    <td tal:content="python:item[1]"/>
+                </tr>
+                <tr tal:condition="not:metadata">
+                    <td colspan="2" i18n:translate="">
+                        This file doesn't provide any metadata 
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <!--End of specific code-->
+    
+    </dd>
+    
+</dl>
