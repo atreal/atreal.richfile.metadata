@@ -11,7 +11,7 @@ from atreal.richfile.metadata.extractors import available_extractors, default_ex
 class MetadataExtractor(RFPlugin):
     """
     """
-    
+
     implements(IMetadataExtractor)
 
     engine = 'plone'
@@ -22,8 +22,8 @@ class MetadataExtractor(RFPlugin):
             return self._contenttype
         self._contenttype = self.context.getContentType()
         return self._contenttype
-        
-    
+
+
     @property
     def extractors(self):
         """ """
@@ -35,8 +35,8 @@ class MetadataExtractor(RFPlugin):
             if x.available() and self.contenttype in x.supportedMimetypes():
                 self._extractors.append(x)
         return self._extractors
-        
-    
+
+
     def process(self):
         """ """
         if not self.isActive():
@@ -47,14 +47,14 @@ class MetadataExtractor(RFPlugin):
             return
         metadata = self._extractMetadata()
         self.info['metadata'] = metadata
-    
-    
+
+
     def _extractMetadata(self):
         """ As it says in the title """
         print "extractAndStoreMetadata"
         extractor, default = self._chooseExtractor()
-        infile = IOmniFile(self.context.getFile())
-        while True: 
+        infile = IOmniFile(self.context.getPrimaryField())
+        while True:
             metadata = extractor.extract(infile)
             if default:
                 break
@@ -74,3 +74,4 @@ class MetadataExtractor(RFPlugin):
                 return x, False
         # We had'nt find a best MT, we return the first extractor
         return self.extractors[default_extractor], True
+

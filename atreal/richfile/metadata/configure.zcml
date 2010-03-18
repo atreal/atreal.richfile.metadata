@@ -13,6 +13,12 @@
 
     <i18n:registerTranslations directory="locales"/>
 
+    <!-- Assigning marker interface to relevant content -->
+    <five:implements
+        class="Products.ATContentTypes.content.image.ATImage"
+        interface="atreal.richfile.qualifier.interfaces.IFileQualifiable"
+        />
+
     <adapter
         for="atreal.richfile.metadata.interfaces.IMetadata"
         factory="atreal.richfile.metadata.adapters.MetadataExtractor"
@@ -42,3 +48,4 @@
         />
 
 </configure>
+
